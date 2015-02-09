@@ -56,7 +56,9 @@ public class SegueManager {
         viewController.performSegueWithIdentifier(id.key, sender: viewController)
     }
     
-    /// Should be called only when prepareForSegue(segue:, sender:) is called on the view controller
+    /**
+    Should be called only when prepareForSegue(segue:, sender:) is called on the view controller
+    */
     public func prepare(segue: UIStoryboardSegue) {
         if let id = segue.identifier {
             if let prep = blocks[id] {
@@ -67,8 +69,7 @@ public class SegueManager {
 }
 
 /**
-Represents one segue key.
-SegueID keys should be added as a private extension to this struct next to each view controller that uses them:
+Represents one segue key. SegueID keys should be added as a private extension to this struct next to each view controller that uses them:
 
 private extension SegueID {
     static let Segue1 = SegueID("Segue1")

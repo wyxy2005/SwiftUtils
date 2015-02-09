@@ -4,11 +4,15 @@
 
 import Foundation
 
-/// This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
+/**
+*  This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
+*/
 public protocol UserDefaultsConvertible {
     typealias UserDefaultsInfoType: _ObjectiveCBridgeable
     
-    /// Create a new instance of the object from the information saved on NSUserDefaults
+    /**
+    Create a new instance of the object from the information saved on NSUserDefaults
+    */
     init(userDefaultsInfo: UserDefaultsInfoType)
     
     /// The information to be saved to NSUserDefaults. This should be a property list object or else NSUserDefaults will complain
@@ -61,10 +65,14 @@ Note: Subscripts with generics are not yet allowed. When they get implemented, g
 public class UserDefaultsClass {
     private let storage = NSUserDefaults.standardUserDefaults()
     
-    /// Create a new instance with the default storage: NSUserDefaults.standardUserDefaults()
+    /**
+    Create a new instance with the default storage: NSUserDefaults.standardUserDefaults()
+    */
     public init() {}
     
-    /// Create a new instance with the given storage
+    /**
+    Create a new instance with the given storage
+    */
     public init(storage: NSUserDefaults) { self.storage = storage }
 
     // MARK: UserDefaultsConvertible
@@ -149,12 +157,22 @@ public class UserDefaultsClass {
     
     // MARK: Other functions
     
-    /// Check if key exists on storage
+    /**
+    Check if key exists on storage
+    
+    :param: key The key to check
+    
+    :returns: true if key is present on storage
+    */
     public func exists <T>(key: UDKey<T>) -> Bool {
         return storage.objectForKey(key.name) != nil
     }
     
-    /// Remove key from storage
+    /**
+    Remove key from storage
+    
+    :param: key The key to remove
+    */
     public func remove <T>(key: UDKey<T>) {
         storage.removeObjectForKey(key.name)
     }
