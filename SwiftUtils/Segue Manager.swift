@@ -5,8 +5,8 @@
 import UIKit
 
 public struct SegueID {
-    let key: String
-    init(_ k: String) { key = k }
+    public let key: String
+    public init(_ k: String) { key = k }
 }
 
 public class SegueManager {
@@ -15,7 +15,7 @@ public class SegueManager {
     
     private var blocks = [String: SeguePreparationBlock]()
     
-    subscript(id: SegueID) -> SeguePreparationBlock? {
+    public subscript(id: SegueID) -> SeguePreparationBlock? {
         get { return blocks[id.key] }
         set { blocks[id.key] = newValue }
     }
