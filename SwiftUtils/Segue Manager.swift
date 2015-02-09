@@ -2,33 +2,61 @@
 //  Segue Manager.swift
 //
 
+// Note: adapted from http://tomlokhorst.tumblr.com/post/104358251649/easy-storyboard-segues-in-swift
+
 import UIKit
 
-public struct SegueID {
-    public let key: String
-    public init(_ k: String) { key = k }
-}
+/**
+Added as a constant property on view controllers:
 
+class ExampleViewController: UIViewController {
+    let segueManager = SegueManager()
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        segueManager.prepare(segue)
+    }
+}
+*/
 public class SegueManager {
     public typealias SeguePreparationBlock = UIStoryboardSegue -> Void
     public init() {}
     
     private var blocks = [String: SeguePreparationBlock]()
     
+    /**
+    Save a preparation block for later use. This is useful when segues aren't triggered using perform(id:,viewController:) but instead come directly from storyboards
+    
+    :param: id The segue to associate the block to
+    :param: preparation The block to run when preparing for the segue
+    */
     public subscript(id: SegueID) -> SeguePreparationBlock? {
         get { return blocks[id.key] }
         set { blocks[id.key] = newValue }
     }
     
+    /**
+    Perform a segue
+    
+    :param: id The segue to perform
+    :param: viewController The view controller that is performing the segue
+    :param: preparation The block to run when preparing for the segue
+    */
     public func perform(id: SegueID, _ viewController: UIViewController, _ preparation: SeguePreparationBlock) {
         blocks[id.key] = preparation
         viewController.performSegueWithIdentifier(id.key, sender: viewController)
     }
     
+    /**
+    Perform a segue
+    
+    :param: id The segue to perform
+    :param: viewController The view controller that is performing the segue
+    */
     public func perform(id: SegueID, _ viewController: UIViewController) {
         viewController.performSegueWithIdentifier(id.key, sender: viewController)
     }
     
+    /// Should be called only when prepareForSegue(segue:, sender:) is called on the view controller
     public func prepare(segue: UIStoryboardSegue) {
         if let id = segue.identifier {
             if let prep = blocks[id] {
@@ -38,40 +66,19 @@ public class SegueManager {
     }
 }
 
-/* Usage:
+/**
+Represents one segue key.
+SegueID keys should be added as a private extension to this struct next to each view controller that uses them:
 
 private extension SegueID {
-    static let MyStoryboardSegue = SegueID("MyStoryboardSegue")
-    static let MyProgramaticSegue = SegueID("MyProgramaticSegue")
+    static let Segue1 = SegueID("Segue1")
 }
 
-class ExampleViewController: UIViewController {
-    let segueManager = SegueManager()
-    
-    override func viewDidLoad() {
-        
-        // For when segues aren't activated in code, but in the storyboard
-        // For example, segues originating from items on a table view
-        segueManager[.MyStoryboardSegue] = { segue in
-            // Do something here
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Call the segue manager to tell it a segue is happening.
-        // Very important, don't forget this part!
-        segueManager.prepare(segue)
-    }
-    
-    func someFunction() {
-        // Perform a segue, passing in a closure to be called when the segue is happening.
-        segueManager.perform(.MyProgramaticSegue, self) { segue in
-            
-            // Now do something to the destination view controller, like setting a view model
-            let vc = segue.destinationViewController as MyViewController
-            vc.viewModel = myViewModel
-        }
-    }
-}
+Adding keys as an extension allows for quick usage:
 
+mySegueManager[.Segue1] = ...
 */
+public struct SegueID {
+    public let key: String
+    public init(_ k: String) { key = k }
+}

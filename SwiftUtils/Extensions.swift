@@ -21,15 +21,15 @@ public extension String {
         return self.componentsSeparatedByString(s)
     }
     
-    subscript (i: Int) -> Character {
+    public subscript (i: Int) -> Character {
         return self[advance(startIndex, i)]
     }
     
-    subscript (i: Int) -> String {
+    public subscript (i: Int) -> String {
         return String(self[i] as Character)
     }
     
-    subscript (r: Range<Int>) -> String {
+    public subscript (r: Range<Int>) -> String {
         return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
     }
 }
@@ -41,14 +41,14 @@ public extension NSIndexPath {
 }
 
 public extension Int {
-    init?(_ string: String) {
+    public init?(_ string: String) {
         if let i = string.toInt() { self = i }
         else { return nil }
     }
 }
 
 public extension Bool {
-    init?(_ string: String) {
+    public init?(_ string: String) {
         if let i = Int(string) { self = i != 0 }
         else { return nil }
     }

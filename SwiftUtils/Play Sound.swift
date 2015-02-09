@@ -1,22 +1,21 @@
 //
 //  Play Sound.swift
-//  Clepsydra
-//
-//  Created by Alexandre on 03/02/15.
-//  Copyright (c) 2015 ACT Productions. All rights reserved.
 //
 
 import Foundation
 import AudioToolbox
 
+/// A very simple class to play sounds on iOS. Stops the sound when deinited
 public class PlaySound {
     private var soundID: SystemSoundID = 0
     
+    /// Play from a sound file
     public init(file: String, vibrate: Bool = true) {
         AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: file), &soundID)
         play(vibrate)
     }
     
+    /// Play the standard tri-tone alert
     public init(vibrate: Bool = true) {
         // Magic number for the standard sms tone
         // From here: http://iphonedevwiki.net/index.php/AudioServices

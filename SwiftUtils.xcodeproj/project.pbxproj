@@ -13,7 +13,7 @@
 		FA03A7031A88C11200B4BF51 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */; };
 		FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FC1A88C11200B4BF51 /* Extensions.swift */; };
 		FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */; };
-		FA03A7061A88C11200B4BF51 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FE1A88C11200B4BF51 /* Logging.swift */; };
+		FA03A7061A88C11200B4BF51 /* Simple Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */; };
 		FA03A7071A88C11200B4BF51 /* Optional Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */; };
 		FA03A7081A88C11200B4BF51 /* Play Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7001A88C11200B4BF51 /* Play Sound.swift */; };
 		FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7011A88C11200B4BF51 /* Segue Manager.swift */; };
@@ -41,7 +41,7 @@
 		FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		FA03A6FC1A88C11200B4BF51 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
-		FA03A6FE1A88C11200B4BF51 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Simple Logging.swift"; sourceTree = "<group>"; };
 		FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional Unwrap.swift"; sourceTree = "<group>"; };
 		FA03A7001A88C11200B4BF51 /* Play Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Play Sound.swift"; sourceTree = "<group>"; };
 		FA03A7011A88C11200B4BF51 /* Segue Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Segue Manager.swift"; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 				FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */,
 				FA03A6FC1A88C11200B4BF51 /* Extensions.swift */,
 				FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */,
-				FA03A6FE1A88C11200B4BF51 /* Logging.swift */,
+				FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */,
 				FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */,
 				FA03A7001A88C11200B4BF51 /* Play Sound.swift */,
 				FA03A7011A88C11200B4BF51 /* Segue Manager.swift */,
@@ -253,7 +253,7 @@
 				FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */,
 				FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */,
 				FA03A7081A88C11200B4BF51 /* Play Sound.swift in Sources */,
-				FA03A7061A88C11200B4BF51 /* Logging.swift in Sources */,
+				FA03A7061A88C11200B4BF51 /* Simple Logging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

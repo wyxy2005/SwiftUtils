@@ -4,28 +4,35 @@
 
 import Foundation
 
-private extension Dictionary {
-    init(_ pairs: [Element]) {
-        self.init()
-        for (k, v) in pairs {
-            self[k] = v
-        }
-    }
-    func map <OutKey: Hashable, OutValue>(transform: Element -> (OutKey, OutValue)) -> [OutKey:OutValue] {
-        return [OutKey:OutValue](Swift.map(self, transform))
-    }
-}
-
+/// This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
 public protocol UserDefaultsConvertible {
     typealias UserDefaultsInfoType: _ObjectiveCBridgeable
+    
+    /// Create a new instance of the object from the information saved on NSUserDefaults
     init(userDefaultsInfo: UserDefaultsInfoType)
+    
+    /// The information to be saved to NSUserDefaults. This should be a property list object or else NSUserDefaults will complain
     var userDefaultsInfo: UserDefaultsInfoType { get }
 }
 
-// NOTE: When static variables on a generic struct are allowed, then move all UDKeys to UDKey and .MyKey notation will be allowed
+/**
+A container for all UDKey's in an application. This struct is supposed to be extended with the various keys
+
+Note: when static variables on a generic struct are implemented, then extend UDKey instead and .MyKey notation will be allowed
+*/
 public struct UDKeys {}
+
+/**
+A single NSUserDefaults key wrapper
+
+It is a good idea to have the key name be the same as the UDKey variable name to avoid collisions
+
+:param: T The type of the object stored in this key
+:param: name The name of the key used to store the object
+:param: defaultValue The default value for the key. This is returned when trying to get a value for this key and the key doesn't yet exist in NSUserDefaults
+*/
 public struct UDKey <T>  {
-    public let name: String // It is a good idea to have the key name be the same as the UDKey variable name to avoid collisions
+    public let name: String
     public let defaultValue: T
     public init(_ n: String, _ v: T) {
         name = n
@@ -33,14 +40,34 @@ public struct UDKey <T>  {
     }
 }
 
-// NOTE: Subscripts with generics are not yet allowed. When they get implemented, this can be re-written using subscripts
+
+/**
+An NSUserDefaults replacement. Uses UDKey for type-safety and default values and supports various storages.
+
+This class supports all objects NSUserDefaults supports, plus objects that conform to NSCoding and UserDefaultsConvertible.
+
+This class should be instantiated once for each storage on a global constant and then used on the entire application:
+
+let UserDefaults = UserDefaultsClass()
+
+[...]
+
+var v = UserDefaults.get(UDKeys.MyKey)
+
+When getting a value for a key (using get), the result is either the value for that key if the key exists on storage or the default value.
+
+Note: Subscripts with generics are not yet allowed. When they get implemented, get/set can be re-written using subscripts and `change` can perhaps disappear.
+*/
 public class UserDefaultsClass {
     private let storage = NSUserDefaults.standardUserDefaults()
-    public init(storage: NSUserDefaults) { self.storage = storage }
+    
+    /// Create a new instance with the default storage: NSUserDefaults.standardUserDefaults()
     public init() {}
     
-    // A version of NSCoding for Swift-only objects that instead of coding
-    // in raw data actually returns a type that is serializable
+    /// Create a new instance with the given storage
+    public init(storage: NSUserDefaults) { self.storage = storage }
+
+    // MARK: UserDefaultsConvertible
     public func get <T: UserDefaultsConvertible>(key: UDKey<T>) -> T {
         if exists(key) {
             return T(userDefaultsInfo: storage.objectForKey(key.name) as T.UserDefaultsInfoType)
@@ -88,7 +115,7 @@ public class UserDefaultsClass {
         set(key, v)
     }
     
-    // NSCoding
+    // MARK: NSCoding
     public func get <T: NSCoding>(key: UDKey<T>) -> T {
         if exists(key) {
             return NSKeyedUnarchiver.unarchiveObjectWithData(storage.objectForKey(key.name) as NSData) as T
@@ -104,7 +131,7 @@ public class UserDefaultsClass {
         set(key, v)
     }
     
-    // _ObjectiveCBridgeable
+    // MARK: _ObjectiveCBridgeable
     public func get <T: _ObjectiveCBridgeable>(key: UDKey<T>) -> T {
         if exists(key) {
             return storage.objectForKey(key.name) as T
@@ -120,25 +147,27 @@ public class UserDefaultsClass {
         set(key, v)
     }
     
-    // Other functions
+    // MARK: Other functions
+    
+    /// Check if key exists on storage
     public func exists <T>(key: UDKey<T>) -> Bool {
         return storage.objectForKey(key.name) != nil
     }
+    
+    /// Remove key from storage
     public func remove <T>(key: UDKey<T>) {
         storage.removeObjectForKey(key.name)
     }
 }
 
-/* Usage:
-
-let UserDefaults = UserDefaultsClass()
-
-extension UDKeys {
-    static var MyKey = UDKey<[String: [String: [Int]]]>("MyKey", [])
+private extension Dictionary {
+    init(_ pairs: [Element]) {
+        self.init()
+        for (k, v) in pairs {
+            self[k] = v
+        }
+    }
+    func map <OutKey: Hashable, OutValue>(transform: Element -> (OutKey, OutValue)) -> [OutKey:OutValue] {
+        return [OutKey:OutValue](Swift.map(self, transform))
+    }
 }
-
-let default = UserDefaults.get(UDKeys.MyKey)
-UserDefaults.set(UDKeys.MyKey, ["asd": ["45455": [3, 65]]])
-let v = UserDefaults.get(UDKeys.MyKey)
-
-*/
