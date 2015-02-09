@@ -150,7 +150,7 @@ public class DatePickerTableViewCell: UITableViewCell {
             
             v2.leading == s.leading
             v2.trailing == s.trailing
-            v2.centerY == s.centerY
+            v2.top == s.top
         }
         
         datePickerContainer.clipsToBounds = true
