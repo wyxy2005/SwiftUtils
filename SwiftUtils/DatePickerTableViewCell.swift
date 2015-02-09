@@ -5,106 +5,7 @@
 import UIKit
 import Cartography
 
-/*public class DynamicTypeLabel: UILabel {
-    required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        prepare()
-    }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        prepare()
-    }
-    override init() {
-        super.init()
-        prepare()
-    }
-    
-    private var notification: NSObjectProtocol?
-    private func prepare() {
-        // For some reason setting this here without delay has no effect
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1), dispatch_get_main_queue()) {
-            self.font = UIFont.preferredFontForTextStyle(self.textStyle)
-        }
-        
-        notification = NSNotificationCenter.defaultCenter().addObserverForName(UIContentSizeCategoryDidChangeNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [unowned self] _ in
-            self.font = UIFont.preferredFontForTextStyle(self.textStyle)
-            self.invalidateIntrinsicContentSize()
-        }
-    }
-    
-    public var textStyle: String = UIFontTextStyleBody {
-        didSet { font = UIFont.preferredFontForTextStyle(textStyle) }
-    }
-}
-*/
-
-
-
-public class DynamicTypeManagerClass {
-    private let elementTable = NSMapTable.weakToStrongObjectsMapTable()
-    private let notification: NSObjectProtocol?
-    private class InfoTuple: NSObject {
-        let keyPath: String
-        let textStyle: String
-        init(_ k: String, _ s: String) {
-            keyPath = k
-            textStyle = s
-        }
-    }
-    
-    public init() {
-        notification = NSNotificationCenter.defaultCenter().addObserverForName(UIContentSizeCategoryDidChangeNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [unowned self] _ in
-            let enumerator = self.elementTable.keyEnumerator()
-            while let element = enumerator.nextObject() as NSObject? {
-                let tuple = self.elementTable.objectForKey(element) as InfoTuple
-                element.setValue(UIFont.preferredFontForTextStyle(tuple.textStyle), forKeyPath: tuple.keyPath)
-            }
-        }
-    }
-    
-    public func watch(label: UILabel, textStyle: String? = nil) {
-        watch(label, fontKeypath: "font", textStyle: textStyle)
-    }
-    public func watch(button: UIButton, textStyle: String? = nil) {
-        watch(button, fontKeypath: "titleLabel.font", textStyle: textStyle)
-    }
-    public func watch(textField: UITextField, textStyle: String? = nil) {
-        watch(textField, fontKeypath: "font", textStyle: textStyle)
-    }
-    public func watch(textView: UITextView, textStyle: String? = nil) {
-        watch(textView, fontKeypath: "font", textStyle: textStyle)
-    }
-    public func watch(object: AnyObject, fontKeypath: String, var textStyle: String? = nil) {
-        if textStyle == nil {
-            if let font = object.valueForKey(fontKeypath) as? UIFont {
-                textStyle = textStyleMatchingFont(font)
-            }
-        }
-        
-        if let style = textStyle {
-            object.setValue(UIFont.preferredFontForTextStyle(style), forKeyPath: fontKeypath)
-            elementTable.setObject(InfoTuple(fontKeypath, style), forKey: object)
-        }
-    }
-    
-    public func textStyleMatchingFont(font: UIFont) -> String? {
-        for style in [UIFontTextStyleBody, UIFontTextStyleCaption1, UIFontTextStyleCaption2, UIFontTextStyleFootnote, UIFontTextStyleHeadline, UIFontTextStyleSubheadline] {
-            if font == UIFont.preferredFontForTextStyle(style) {
-                return style
-            }
-        }
-        
-        return nil
-    }
-}
-
-let DynamicTypeManager = DynamicTypeManagerClass()
-
-
-
-
-
-let DatePickerTableViewCellDidExpandNotification = "DatePickerTableViewCellDidExpandNotification"
+private let DatePickerTableViewCellDidExpandNotification = "DatePickerTableViewCellDidExpandNotification"
 
 public class DatePickerTableViewCell: UITableViewCell {
     
@@ -237,12 +138,14 @@ public class DatePickerTableViewCell: UITableViewCell {
         
         // The default value of false is already set but calling this sets the alpha values as well
         setExpanded(false, animate: false)
+        
+        // Set text styles
+        DynamicTypeManager.watch(leftLabel, textStyle: UIFontTextStyleBody)
+        DynamicTypeManager.watch(rightLabel, textStyle: UIFontTextStyleBody)
     }
     func datePicked() {
         date = datePicker.date
         dateChanged?(cell: self)
-        DynamicTypeManager.watch(leftLabel, textStyle: UIFontTextStyleHeadline)
-        DynamicTypeManager.watch(rightLabel, textStyle: UIFontTextStyleCaption2)
     }
     
     public override func setHighlighted(highlighted: Bool, animated: Bool) {
@@ -289,4 +192,3 @@ public class DatePickerTableViewCell: UITableViewCell {
         if expanded { toggleExpanded(tableView: tableView) }
     }
 }
-

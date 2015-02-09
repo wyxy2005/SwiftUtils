@@ -1,10 +1,6 @@
 //
-//  NSURL.swift
-//  Clepsydra
-//
-//  Created by Alexandre on 01/02/15.
-//  Copyright (c) 2015 ACT Productions. All rights reserved.
-//
+//  Extensions.swift
+//  
 
 import Foundation
 

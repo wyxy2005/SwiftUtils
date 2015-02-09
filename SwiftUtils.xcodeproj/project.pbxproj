@@ -19,6 +19,7 @@
 		FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7011A88C11200B4BF51 /* Segue Manager.swift */; };
 		FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7021A88C11200B4BF51 /* UserDefaults.swift */; };
 		FA03A70C1A88C2AB00B4BF51 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */; };
+		FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		FA03A7011A88C11200B4BF51 /* Segue Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Segue Manager.swift"; sourceTree = "<group>"; };
 		FA03A7021A88C11200B4BF51 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
+		FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTypeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */,
+				FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */,
 				FA03A6FC1A88C11200B4BF51 /* Extensions.swift */,
 				FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */,
 				FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */,
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */,
+				FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */,
 				FA03A7071A88C11200B4BF51 /* Optional Unwrap.swift in Sources */,
 				FA03A7031A88C11200B4BF51 /* DatePickerTableViewCell.swift in Sources */,
 				FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */,

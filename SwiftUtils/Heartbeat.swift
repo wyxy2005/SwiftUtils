@@ -1,10 +1,6 @@
 //
 //  Heartbeat.swift
-//  Clepsydra
-//
-//  Created by Alexandre on 26/10/14.
-//  Copyright (c) 2014 ACT Productions. All rights reserved.
-//
+//  
 
 import Foundation
 
