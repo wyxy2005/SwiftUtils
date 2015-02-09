@@ -25,9 +25,9 @@ public protocol UserDefaultsConvertible {
 // NOTE: When static variables on a generic struct are allowed, then move all UDKeys to UDKey and .MyKey notation will be allowed
 public struct UDKeys {}
 public struct UDKey <T>  {
-    let name: String // It is a good idea to have the key name be the same as the UDKey variable name to avoid collisions
-    let defaultValue: T
-    init(_ n: String, _ v: T) {
+    public let name: String // It is a good idea to have the key name be the same as the UDKey variable name to avoid collisions
+    public let defaultValue: T
+    public init(_ n: String, _ v: T) {
         name = n
         defaultValue = v
     }
