@@ -161,10 +161,6 @@ public class DatePickerTableViewCell: UITableViewCell {
     }
     
     private func prepare() {
-        
-        DynamicTypeManager.watch(leftLabel, textStyle: UIFontTextStyleHeadline)
-        DynamicTypeManager.watch(rightLabel, textStyle: UIFontTextStyleCaption2)
-        
         // Containers
         for view in [labelsContainer, datePickerContainer] {
             contentView.addSubview(view)
@@ -245,6 +241,8 @@ public class DatePickerTableViewCell: UITableViewCell {
     func datePicked() {
         date = datePicker.date
         dateChanged?(cell: self)
+        DynamicTypeManager.watch(leftLabel, textStyle: UIFontTextStyleHeadline)
+        DynamicTypeManager.watch(rightLabel, textStyle: UIFontTextStyleCaption2)
     }
     
     public override func setHighlighted(highlighted: Bool, animated: Bool) {
