@@ -7,21 +7,21 @@ import UIKit
 public class DatePickerTableViewCell: ExpandableTableViewCell {
     
     public var dateChanged: ((cell: DatePickerTableViewCell) -> ())?
-    public var dateFormatter: ((cell: DatePickerTableViewCell, date: NSDate) -> String) = { cell, date in
+    public var dateFormatter: ((cell: DatePickerTableViewCell, date: NSDate) -> String)? = { cell, date in
         let df = NSDateFormatter()
         df.dateStyle = .ShortStyle
         df.timeStyle = .ShortStyle
         return df.stringFromDate(date)
     } {
         didSet {
-            rightLabel.text = dateFormatter(cell: self, date: date)
+            rightLabel.text = dateFormatter?(cell: self, date: date)
         }
     }
     
     public var date: NSDate = NSDate() {
         didSet {
             datePicker.date = date
-            rightLabel.text = dateFormatter(cell: self, date: date)
+            rightLabel.text = dateFormatter?(cell: self, date: date)
         }
     }
     
