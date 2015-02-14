@@ -14,7 +14,12 @@ private func loggingDateFormat() -> String {
 /**
 Log the date, file, function, line number, textual representation of `object` and a newline character into the standard output
 */
-public func p<T>(object: T?, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
+public func p<T>(object: T, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
     let filename = file.lastPathComponent.stringByDeletingPathExtension
     println("\(loggingDateFormat()) - \(filename).\(function)[\(line)]: \(object)")
+}
+
+public func p(file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
+    let filename = file.lastPathComponent.stringByDeletingPathExtension
+    println("\(loggingDateFormat()) - \(filename).\(function)[\(line)]")
 }
