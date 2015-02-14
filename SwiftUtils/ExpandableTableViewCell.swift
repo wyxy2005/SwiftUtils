@@ -76,7 +76,6 @@ public class ExpandableTableViewCell: UITableViewCell {
     public func toggleExpandedAnimated() {
         tableView?.beginUpdates()
         
-        if !expanded && collapseOtherCellsWhenExpanding { NSNotificationCenter.defaultCenter().postNotificationName(ExpandableTableViewCellDidExpandNotification, object: self) }
         expand(!expanded, animate: true)
         
         tableView?.endUpdates()
@@ -230,6 +229,8 @@ public class ExpandableTableViewCell: UITableViewCell {
     
     private func expand(expand: Bool, animate: Bool) {
         expanded = expand
+        
+        if expanded && collapseOtherCellsWhenExpanding { NSNotificationCenter.defaultCenter().postNotificationName(ExpandableTableViewCellDidExpandNotification, object: self) }
         
         if let c = expansionConstraint { embeddedViewContainer.removeConstraint(c) }
         expansionConstraint = nil
