@@ -26,7 +26,7 @@ public class Heartbeat: NSObject {
     }
     
     /**
-    Instantiates with a time interval 1/beatsPerSecond
+    Instantiates with a time interval equal to 1/beatsPerSecond
     */
     public convenience init(beatsPerSecond: Double, action: ()->()) {
         self.init(timeInterval: 1/beatsPerSecond, action: action)
@@ -60,7 +60,7 @@ public class Heartbeat: NSObject {
         return timer != nil
     }
     
-    public func fire() {
+    @objc private func fire() {
         action()
     }
     

@@ -74,26 +74,21 @@ public class ExpandableTableViewCell: UITableViewCell {
     }
     
     public func toggleExpandedAnimated() {
-        tableView?.beginUpdates()
-        
-        expand(!expanded, animate: true)
-        
-        tableView?.endUpdates()
+        setExpanded(!expanded, animate: true)
     }
     public func expandAnimated() {
-        if !expanded { toggleExpandedAnimated() }
+        setExpanded(true, animate: true)
     }
     public func collapseAnimated() {
-        if expanded { toggleExpandedAnimated() }
+        setExpanded(false, animate: true)
     }
     
     public func setExpanded(expanded: Bool, animate: Bool) {
-        if animate {
-            if self.expanded != expanded { toggleExpandedAnimated() }
-        }
-        else {
-            expand(expanded, animate: false)
-        }
+        if self.expanded == expanded { return }
+        
+        if animate { tableView?.beginUpdates() }
+        expand(expanded, animate: animate)
+        if animate { tableView?.endUpdates() }
     }
     
     // MARK: - Private vars
