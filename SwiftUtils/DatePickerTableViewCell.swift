@@ -12,6 +12,10 @@ public class DatePickerTableViewCell: ExpandableTableViewCell {
         df.dateStyle = .ShortStyle
         df.timeStyle = .ShortStyle
         return df.stringFromDate(date)
+    } {
+        didSet {
+            rightLabel.text = dateFormatter(cell: self, date: date)
+        }
     }
     
     public var date: NSDate = NSDate() {
