@@ -88,9 +88,9 @@ public class ExpandableTableViewCell: UITableViewCell {
     public func setExpanded(expanded: Bool, animate: Bool) {
         if self.expanded == expanded { return }
         
-        if animate { tableView?.beginUpdates() }
+        //if animate { tableView?.beginUpdates() }
         expand(expanded, animate: animate)
-        if animate { tableView?.endUpdates() }
+        //if animate { tableView?.endUpdates() }
     }
     
     // MARK: - Private vars
