@@ -2,6 +2,8 @@
 //  ExpandableTableViewCell.swift
 //
 
+// Note: adapted from https://github.com/DylanVann/DVDatePickerTableViewCell
+
 import UIKit
 import Cartography
 
