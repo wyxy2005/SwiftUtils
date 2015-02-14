@@ -5,7 +5,7 @@
 import Foundation
 
 /**
-*  This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
+This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
 */
 public protocol UserDefaultsConvertible {
     typealias UserDefaultsInfoType: _ObjectiveCBridgeable
@@ -44,7 +44,6 @@ public struct UDKey <T>  {
     }
 }
 
-
 /**
 An NSUserDefaults replacement. Uses UDKey for type-safety and default values and supports various storages.
 
@@ -52,11 +51,11 @@ This class supports all objects NSUserDefaults supports, plus objects that confo
 
 This class should be instantiated once for each storage on a global constant and then used on the entire application:
 
-let UserDefaults = UserDefaultsClass()
+`let UserDefaults = UserDefaultsClass()
 
 [...]
 
-var v = UserDefaults.get(UDKeys.MyKey)
+var v = UserDefaults.get(UDKeys.MyKey)`
 
 When getting a value for a key (using get), the result is either the value for that key if the key exists on storage or the default value.
 

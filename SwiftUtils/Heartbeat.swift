@@ -5,7 +5,7 @@
 import Foundation
 
 /**
-*  A simple class for calling a block repeatedly with defined a time interval
+A simple class for calling a block repeatedly with defined a time interval
 */
 public class Heartbeat: NSObject {
     public let timeInterval: Double

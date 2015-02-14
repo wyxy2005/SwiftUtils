@@ -7,7 +7,7 @@
 import UIKit
 
 /**
-* A class deigned to make Dynamic Type easier.
+A class deigned to make Dynamic Type easier.
 */
 public class DynamicTypeManagerClass {
     private let elementTable = NSMapTable.weakToStrongObjectsMapTable()

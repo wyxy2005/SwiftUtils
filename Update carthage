@@ -1,0 +1,4 @@
+#rm -rf ~/Library/Caches/org.carthage.CarthageKit
+cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd
+carthage update
+exit

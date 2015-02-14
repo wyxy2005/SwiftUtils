@@ -6,7 +6,7 @@ import Foundation
 import AudioToolbox
 
 /**
-*  A very simple class to play sounds on iOS. Stops the sound when deinited
+A very simple class to play sounds on iOS. Stops the sound when deinited.
 */
 public class PlaySound {
     private var soundID: SystemSoundID = 0

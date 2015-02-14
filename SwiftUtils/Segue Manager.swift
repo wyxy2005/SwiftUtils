@@ -9,13 +9,13 @@ import UIKit
 /**
 Added as a constant property on view controllers:
 
-class ExampleViewController: UIViewController {
+`class ExampleViewController: UIViewController {
     let segueManager = SegueManager()
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         segueManager.prepare(segue)
     }
-}
+}`
 */
 public class SegueManager {
     public typealias SeguePreparationBlock = UIStoryboardSegue -> Void

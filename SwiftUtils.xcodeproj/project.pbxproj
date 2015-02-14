@@ -10,7 +10,6 @@
 		FA03A6E51A88C0AE00B4BF51 /* SwiftUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = FA03A6E41A88C0AE00B4BF51 /* SwiftUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA03A6EB1A88C0AE00B4BF51 /* SwiftUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03A6DF1A88C0AE00B4BF51 /* SwiftUtils.framework */; };
 		FA03A6F21A88C0AE00B4BF51 /* SwiftUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6F11A88C0AE00B4BF51 /* SwiftUtilsTests.swift */; };
-		FA03A7031A88C11200B4BF51 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */; };
 		FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FC1A88C11200B4BF51 /* Extensions.swift */; };
 		FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */; };
 		FA03A7061A88C11200B4BF51 /* Simple Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */; };
@@ -20,6 +19,7 @@
 		FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7021A88C11200B4BF51 /* UserDefaults.swift */; };
 		FA03A70C1A88C2AB00B4BF51 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */; };
 		FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */; };
+		FA8665321A898512004615CC /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FA8665311A898512004615CC /* Cartfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +49,8 @@
 		FA03A7021A88C11200B4BF51 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTypeManager.swift; sourceTree = "<group>"; };
+		FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewCell.swift; sourceTree = "<group>"; };
+		FA8665311A898512004615CC /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */,
 				FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */,
 				FA03A6FC1A88C11200B4BF51 /* Extensions.swift */,
+				FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */,
 				FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */,
 				FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */,
 				FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */,
@@ -137,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */,
+				FA8665311A898512004615CC /* Cartfile */,
 			);
 			name = Frameworks;
 			path = ..;
@@ -232,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8665321A898512004615CC /* Cartfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +257,6 @@
 				FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */,
 				FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */,
 				FA03A7071A88C11200B4BF51 /* Optional Unwrap.swift in Sources */,
-				FA03A7031A88C11200B4BF51 /* DatePickerTableViewCell.swift in Sources */,
 				FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */,
 				FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */,
 				FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */,
@@ -368,6 +372,7 @@
 		FA03A6F61A88C0AE00B4BF51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -389,6 +394,7 @@
 		FA03A6F71A88C0AE00B4BF51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

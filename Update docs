@@ -1,0 +1,3 @@
+cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd
+jazzy --author "Alexandre Truppel" --github_url "https://github.com/truppelito/SwiftUtils" --min-acl public
+exit
