@@ -22,6 +22,7 @@ public class DatePickerTableViewCell: ExpandableTableViewCell {
         didSet {
             datePicker.date = date
             rightLabel.text = dateFormatter?(cell: self, date: date)
+            p("didSet called for date on DatePickerTableViewCell!")
         }
     }
     
