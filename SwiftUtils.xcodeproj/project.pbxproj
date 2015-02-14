@@ -17,6 +17,8 @@
 		FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7011A88C11200B4BF51 /* Segue Manager.swift */; };
 		FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7021A88C11200B4BF51 /* UserDefaults.swift */; };
 		FA03A70C1A88C2AB00B4BF51 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */; };
+		FA0FEA501A8F6F15007C06A1 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */; };
+		FA0FEA511A8F6F17007C06A1 /* ExpandableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */; };
 		FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */; };
 		FA8665321A898512004615CC /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FA8665311A898512004615CC /* Cartfile */; };
 /* End PBXBuildFile section */
@@ -252,11 +254,13 @@
 			files = (
 				FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */,
 				FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */,
+				FA0FEA511A8F6F17007C06A1 /* ExpandableTableViewCell.swift in Sources */,
 				FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */,
 				FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */,
 				FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */,
 				FA03A7081A88C11200B4BF51 /* Play Sound.swift in Sources */,
 				FA03A7061A88C11200B4BF51 /* Simple Logging.swift in Sources */,
+				FA0FEA501A8F6F15007C06A1 /* DatePickerTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
