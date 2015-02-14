@@ -13,7 +13,6 @@
 		FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FC1A88C11200B4BF51 /* Extensions.swift */; };
 		FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */; };
 		FA03A7061A88C11200B4BF51 /* Simple Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */; };
-		FA03A7071A88C11200B4BF51 /* Optional Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */; };
 		FA03A7081A88C11200B4BF51 /* Play Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7001A88C11200B4BF51 /* Play Sound.swift */; };
 		FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7011A88C11200B4BF51 /* Segue Manager.swift */; };
 		FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A7021A88C11200B4BF51 /* UserDefaults.swift */; };
@@ -43,7 +42,6 @@
 		FA03A6FC1A88C11200B4BF51 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heartbeat.swift; sourceTree = "<group>"; };
 		FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Simple Logging.swift"; sourceTree = "<group>"; };
-		FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional Unwrap.swift"; sourceTree = "<group>"; };
 		FA03A7001A88C11200B4BF51 /* Play Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Play Sound.swift"; sourceTree = "<group>"; };
 		FA03A7011A88C11200B4BF51 /* Segue Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Segue Manager.swift"; sourceTree = "<group>"; };
 		FA03A7021A88C11200B4BF51 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -78,6 +76,7 @@
 			children = (
 				FA03A6E11A88C0AE00B4BF51 /* SwiftUtils */,
 				FA03A6EE1A88C0AE00B4BF51 /* SwiftUtilsTests */,
+				FA03A70D1A88C2B500B4BF51 /* Frameworks */,
 				FA03A6E01A88C0AE00B4BF51 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,11 +99,9 @@
 				FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */,
 				FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */,
 				FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */,
-				FA03A6FF1A88C11200B4BF51 /* Optional Unwrap.swift */,
 				FA03A7001A88C11200B4BF51 /* Play Sound.swift */,
 				FA03A7011A88C11200B4BF51 /* Segue Manager.swift */,
 				FA03A7021A88C11200B4BF51 /* UserDefaults.swift */,
-				FA03A70D1A88C2B500B4BF51 /* Frameworks */,
 				FA03A6E21A88C0AE00B4BF51 /* Supporting Files */,
 			);
 			path = SwiftUtils;
@@ -143,7 +140,6 @@
 				FA8665311A898512004615CC /* Cartfile */,
 			);
 			name = Frameworks;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +252,6 @@
 			files = (
 				FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */,
 				FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */,
-				FA03A7071A88C11200B4BF51 /* Optional Unwrap.swift in Sources */,
 				FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */,
 				FA03A70A1A88C11200B4BF51 /* UserDefaults.swift in Sources */,
 				FA03A7051A88C11200B4BF51 /* Heartbeat.swift in Sources */,

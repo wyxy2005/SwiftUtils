@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import SwiftUtils
 import Cartography
 
 private let ExpandableTableViewCellDidExpandNotification = "ExpandableTableViewCellDidExpandNotification"
