@@ -60,7 +60,7 @@ public class ExpandableTableViewCell: UITableViewCell {
     
     // MARK: - Public methods
     
-    public func reloadHeightForTableView(#animate: Bool) {
+    public func reloadHeightOnTableView(#animate: Bool) {
         if animate {
             UIView.animateWithDuration(standardTableViewAnimationTime, animations: contentView.layoutIfNeeded)
             tableView?.beginUpdates()
@@ -236,9 +236,9 @@ public class ExpandableTableViewCell: UITableViewCell {
         let animation1: ()->() = {
             self.rightLabel.textColor = self.expanded ? self.tintColor : rightLabelCollapsedTextColor
         }
-        let animation2: ()->() = {
+        /*let animation2: ()->() = {
             self.contentView.layoutIfNeeded()
-        }
+        }*/
         let completion: (Bool)->() = { finished in
             if finished && !self.expanded { self.embeddedViewContainer.alpha = 0 }
         }
@@ -246,13 +246,15 @@ public class ExpandableTableViewCell: UITableViewCell {
         if expanded { embeddedViewContainer.alpha = 1 }
         if animate {
             UIView.transitionWithView(rightLabel, duration: standardTableViewAnimationTime, options: .TransitionCrossDissolve, animations: animation1, completion: completion)
-            UIView.animateWithDuration(standardTableViewAnimationTime, animations: animation2)
+            //UIView.animateWithDuration(standardTableViewAnimationTime, animations: animation2)
         }
         else {
             animation1()
-            animation2()
+            //animation2()
             completion(true)
         }
+        
+        reloadHeightOnTableView(animate: animate)
     }
     
     // MARK: - Other methods
