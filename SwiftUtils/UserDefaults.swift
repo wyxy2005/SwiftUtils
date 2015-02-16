@@ -6,7 +6,7 @@ import Foundation
 
 /// NSUserDefaults only accepts property list objects
 /// This serves as a reminder for that
-public protocol PropertyList: _ObjectiveCBridgeable {}
+public typealias PropertyList = _ObjectiveCBridgeable
 
 /**
 This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
