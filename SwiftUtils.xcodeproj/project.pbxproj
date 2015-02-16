@@ -21,6 +21,8 @@
 		FA0FEA511A8F6F17007C06A1 /* ExpandableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */; };
 		FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */; };
 		FA8665321A898512004615CC /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FA8665311A898512004615CC /* Cartfile */; };
+		FAEF4CD41A92ADB800339334 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEF4CD31A92ADB800339334 /* Signal.swift */; };
+		FAEF4CD81A92AEB900339334 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEF4CD71A92AEB900339334 /* CGRect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTypeManager.swift; sourceTree = "<group>"; };
 		FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewCell.swift; sourceTree = "<group>"; };
 		FA8665311A898512004615CC /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		FAEF4CD31A92ADB800339334 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		FAEF4CD71A92AEB900339334 /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,14 +99,14 @@
 		FA03A6E11A88C0AE00B4BF51 /* SwiftUtils */ = {
 			isa = PBXGroup;
 			children = (
-				FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */,
 				FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */,
-				FA03A6FC1A88C11200B4BF51 /* Extensions.swift */,
-				FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */,
+				FAEF4CD61A92ADD000339334 /* TableViewCells */,
+				FAEF4CD51A92ADC100339334 /* Extensions */,
 				FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */,
 				FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */,
 				FA03A7001A88C11200B4BF51 /* Play Sound.swift */,
 				FA03A7011A88C11200B4BF51 /* Segue Manager.swift */,
+				FAEF4CD31A92ADB800339334 /* Signal.swift */,
 				FA03A7021A88C11200B4BF51 /* UserDefaults.swift */,
 				FA03A6E21A88C0AE00B4BF51 /* Supporting Files */,
 			);
@@ -142,6 +146,24 @@
 				FA8665311A898512004615CC /* Cartfile */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAEF4CD51A92ADC100339334 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FAEF4CD71A92AEB900339334 /* CGRect.swift */,
+				FA03A6FC1A88C11200B4BF51 /* Extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		FAEF4CD61A92ADD000339334 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A6FB1A88C11200B4BF51 /* DatePickerTableViewCell.swift */,
+				FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA03A7091A88C11200B4BF51 /* Segue Manager.swift in Sources */,
+				FAEF4CD81A92AEB900339334 /* CGRect.swift in Sources */,
+				FAEF4CD41A92ADB800339334 /* Signal.swift in Sources */,
 				FA15B3281A8929F6001E3866 /* DynamicTypeManager.swift in Sources */,
 				FA0FEA511A8F6F17007C06A1 /* ExpandableTableViewCell.swift in Sources */,
 				FA03A7041A88C11200B4BF51 /* Extensions.swift in Sources */,

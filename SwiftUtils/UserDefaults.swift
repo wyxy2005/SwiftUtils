@@ -4,11 +4,15 @@
 
 import Foundation
 
+/// NSUserDefaults only accepts property list objects
+/// This serves as a reminder for that
+public protocol PropertyList: _ObjectiveCBridgeable {}
+
 /**
 This is a replacement for NSCoding useful for true Swift classes so that they don't have to become Objective-C objects just to be saved easily on NSUserDefaults
 */
 public protocol UserDefaultsConvertible {
-    typealias UserDefaultsInfoType: _ObjectiveCBridgeable
+    typealias UserDefaultsInfoType: PropertyList
     
     /**
     Create a new instance of the object from the information saved on NSUserDefaults
@@ -139,16 +143,16 @@ public class UserDefaultsClass {
     }
     
     // MARK: _ObjectiveCBridgeable
-    public func get <T: _ObjectiveCBridgeable>(key: UDKey<T>) -> T {
+    public func get <T: PropertyList>(key: UDKey<T>) -> T {
         if exists(key) {
             return storage.objectForKey(key.name) as T
         }
         else { return key.defaultValue }
     }
-    public func set <T: _ObjectiveCBridgeable>(key: UDKey<T>, _ value: T) {
+    public func set <T: PropertyList>(key: UDKey<T>, _ value: T) {
         storage.setObject(value as? T._ObjectiveCType, forKey: key.name)
     }
-    public func change <T: _ObjectiveCBridgeable>(key: UDKey<T>, block: (inout value: T)->()) {
+    public func change <T: PropertyList>(key: UDKey<T>, block: (inout value: T)->()) {
         var v = get(key)
         block(value: &v)
         set(key, v)
