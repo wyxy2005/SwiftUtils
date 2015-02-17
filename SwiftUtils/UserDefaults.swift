@@ -78,8 +78,8 @@ public class UserDefaultsClass {
     
     private let iCloudStorage = NSUbiquitousKeyValueStore.defaultStore()
     private let timestampKey = "_CloudKeysLastChangedTimestamp"
-    private var diskNotification: NSObjectProtocol?
     private var iCloudNotification: NSObjectProtocol?
+    private var diskNotification: NSObjectProtocol?
     
     // MARK: Init/Deinit
     public convenience init() {
