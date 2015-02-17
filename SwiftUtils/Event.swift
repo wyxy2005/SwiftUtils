@@ -25,6 +25,8 @@ public class Event<T> {
         return listener
     }
     
+    public init() {}
+    
     public func listen(listener: AnyObject, callback: () -> ()) -> EventListener<T> {
         return addListener(EventListener<T>(listener: listener, callback: .Type1(callback)))
     }
