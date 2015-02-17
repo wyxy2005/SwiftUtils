@@ -72,8 +72,8 @@ public class UserDefaultsClass {
     private let diskStorage: NSUserDefaults
     
     public struct Signals {
-        static let diskStorageChanged = Event<UserDefaultsClass>()
-        static let cloudStorageUpdatedDiskStorage = Event<UserDefaultsClass>()
+        public static let diskStorageChanged = Event<UserDefaultsClass>()
+        public static let cloudStorageUpdatedDiskStorage = Event<UserDefaultsClass>()
     }
     
     private let iCloudStorage = NSUbiquitousKeyValueStore.defaultStore()
