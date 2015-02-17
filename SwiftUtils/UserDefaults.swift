@@ -71,15 +71,14 @@ public class UserDefaultsClass {
     public var iCloudSync: Bool { didSet { setupCloudSync() } }
     private let diskStorage: NSUserDefaults
     
-    public struct Signals {
-        public static let diskStorageChanged = Event<UserDefaultsClass>()
-        public static let cloudStorageUpdatedDiskStorage = Event<UserDefaultsClass>()
+    public struct Events {
+        public static let diskStorageChangedReasonLocal = Event<(userDefaults: UserDefaultsClass, changedKey: String)>()
+        public static let diskStorageChangedReasonCloud = Event<UserDefaultsClass>()
     }
     
     private let iCloudStorage = NSUbiquitousKeyValueStore.defaultStore()
     private let timestampKey = "_CloudKeysLastChangedTimestamp"
     private var iCloudNotification: NSObjectProtocol?
-    private var diskNotification: NSObjectProtocol?
     
     // MARK: Init/Deinit
     public convenience init() {
@@ -95,16 +94,10 @@ public class UserDefaultsClass {
         self.diskStorage = storage
         self.iCloudSync = iCloudSync
         setupCloudSync()
-        
-        diskNotification = NSNotificationCenter.defaultCenter()
-            .addObserverForName(NSUserDefaultsDidChangeNotification,
-                object: storage,
-                queue: NSOperationQueue.mainQueue()) { _ in Signals.diskStorageChanged.fire(self) }
     }
     
     deinit {
         if let obj = iCloudNotification { NSNotificationCenter.defaultCenter().removeObserver(obj) }
-        if let obj = diskNotification { NSNotificationCenter.defaultCenter().removeObserver(obj) }
     }
     
     // MARK: iCloud sync functions
@@ -152,7 +145,7 @@ public class UserDefaultsClass {
         iCloudStorage.setObject(mostRecentTimestamp, forKey: timestampKey)
         
         iCloudStorage.synchronize() // Save changes
-        Signals.cloudStorageUpdatedDiskStorage.fire(self)
+        Events.diskStorageChangedReasonCloud.fire(self)
     }
     private func iCloudStorageChanged(notification: NSNotification!) {
         let userInfo = notification.userInfo as [String:AnyObject]
@@ -164,20 +157,6 @@ public class UserDefaultsClass {
         case NSUbiquitousKeyValueStoreInitialSyncChange: fallthrough
         case NSUbiquitousKeyValueStoreAccountChange: solveDiskCloudCollision()
         default: break
-        }
-    }
-    
-    // MARK: setObject helper functions
-    private func setObjectOnDisk<T>(object: AnyObject?, forKey key: UDKey<T>) {
-        diskStorage.setObject(object, forKey: key.name)
-        if key.iCloudSync { diskStorage.setObject(NSDate(), forKey: timestampKey) }
-    }
-    
-    private func setObjectOnCloud<T>(object: AnyObject?, forKey key: UDKey<T>) {
-        if iCloudSync && key.iCloudSync {
-            iCloudStorage.setObject(object, forKey: key.name)
-            iCloudStorage.setObject(NSDate(), forKey: timestampKey)
-            iCloudStorage.synchronize()
         }
     }
     
@@ -266,9 +245,25 @@ public class UserDefaultsClass {
     public func remove <T>(key: UDKey<T>) {
         diskStorage.removeObjectForKey(key.name)
         if key.iCloudSync { diskStorage.setObject(NSDate(), forKey: timestampKey) }
+        Events.diskStorageChangedReasonLocal.fire((userDefaults: self, changedKey: key.name))
         
         if iCloudSync && key.iCloudSync {
             iCloudStorage.removeObjectForKey(key.name)
+            iCloudStorage.setObject(NSDate(), forKey: timestampKey)
+            iCloudStorage.synchronize()
+        }
+    }
+    
+    // MARK: setObject helper functions
+    private func setObjectOnDisk<T>(object: AnyObject?, forKey key: UDKey<T>) {
+        diskStorage.setObject(object, forKey: key.name)
+        if key.iCloudSync { diskStorage.setObject(NSDate(), forKey: timestampKey) }
+        Events.diskStorageChangedReasonLocal.fire((userDefaults: self, changedKey: key.name))
+    }
+    
+    private func setObjectOnCloud<T>(object: AnyObject?, forKey key: UDKey<T>) {
+        if iCloudSync && key.iCloudSync {
+            iCloudStorage.setObject(object, forKey: key.name)
             iCloudStorage.setObject(NSDate(), forKey: timestampKey)
             iCloudStorage.synchronize()
         }
