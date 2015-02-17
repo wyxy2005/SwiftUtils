@@ -34,13 +34,11 @@ public class SegueManager {
         set { blocks[id.key] = newValue }
     }
     
-    /**
-    Perform a segue
-    
-    :param: id The segue to perform
-    :param: viewController The view controller that is performing the segue
-    :param: preparation The block to run when preparing for the segue
-    */
+    ///  Perform a segue
+    ///
+    ///  :param: id             The segue to perform
+    ///  :param: viewController The view controller that is performing the segue
+    ///  :param: preparation    The block to run when preparing for the segue
     public func perform(id: SegueID, _ viewController: UIViewController, _ preparation: SeguePreparationBlock) {
         blocks[id.key] = preparation
         viewController.performSegueWithIdentifier(id.key, sender: viewController)
@@ -56,9 +54,7 @@ public class SegueManager {
         viewController.performSegueWithIdentifier(id.key, sender: viewController)
     }
     
-    /**
-    Should be called only when prepareForSegue(segue:, sender:) is called on the view controller
-    */
+    ///  Should be called only when prepareForSegue(segue:, sender:) is called on the view controller
     public func prepare(segue: UIStoryboardSegue) {
         if let id = segue.identifier {
             if let prep = blocks[id] {
