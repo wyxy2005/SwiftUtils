@@ -151,10 +151,23 @@ public class EventListener<T> {
         return self
     }
     
-    // choose queue
-    
     public func accumulate(accumulator: (oldData: T, justArrived: T) -> T) -> EventListener<T> {
         self.accumulator = accumulator
+        return self
+    }
+    
+    // TODO: choose queue
+    // TODO: better option?
+    public func fire() -> EventListener<T>  {
+        switch callback {
+        case .Type1(let f): f()
+        default: break // TODO: error message?
+        }
+        
+        return self
+    }
+    public func fire(data: T) -> EventListener<T>  {
+        callWithData(data)
         return self
     }
     
