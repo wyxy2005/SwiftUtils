@@ -72,8 +72,8 @@ public class UserDefaultsClass {
     private let diskStorage: NSUserDefaults
     
     public struct Signals {
-        static let diskStorageChanged = Event<Any>()
-        static let cloudStorageUpdatedDiskStorage = Event<Any>()
+        static let diskStorageChanged = Event<UserDefaultsClass>()
+        static let cloudStorageUpdatedDiskStorage = Event<UserDefaultsClass>()
     }
     
     private let iCloudStorage = NSUbiquitousKeyValueStore.defaultStore()
@@ -99,7 +99,7 @@ public class UserDefaultsClass {
         diskNotification = NSNotificationCenter.defaultCenter()
             .addObserverForName(NSUserDefaultsDidChangeNotification,
                 object: storage,
-                queue: NSOperationQueue.mainQueue()) { _ in Signals.diskStorageChanged.fire("") }
+                queue: NSOperationQueue.mainQueue()) { _ in Signals.diskStorageChanged.fire(self) }
     }
     
     deinit {
@@ -152,7 +152,7 @@ public class UserDefaultsClass {
         iCloudStorage.setObject(mostRecentTimestamp, forKey: timestampKey)
         
         iCloudStorage.synchronize() // Save changes
-        Signals.cloudStorageUpdatedDiskStorage.fire("")
+        Signals.cloudStorageUpdatedDiskStorage.fire(self)
     }
     private func iCloudStorageChanged(notification: NSNotification!) {
         let userInfo = notification.userInfo as [String:AnyObject]
