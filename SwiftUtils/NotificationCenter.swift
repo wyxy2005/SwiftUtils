@@ -14,6 +14,8 @@ import Foundation
 public struct NCKeys {}
 */
 
+public let NotificationCenter = NotificationCenterClass()
+
 public class NotificationCenterClass {
     
     private var observers = [String:[NotificationObserver]]()
@@ -166,5 +168,3 @@ public class NotificationObserver {
         NotificationCenter.dumpNotificationObserver(self)
     }
 }
-
-public let NotificationCenter = NotificationCenterClass()
