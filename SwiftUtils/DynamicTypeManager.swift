@@ -6,9 +6,10 @@
 
 import UIKit
 
-/**
-A class deigned to make Dynamic Type easier.
-*/
+/// Singleton
+public let DynamicTypeManager = DynamicTypeManagerClass()
+
+///  A class deigned to make Dynamic Type easier.
 public class DynamicTypeManagerClass {
     private let elementTable = NSMapTable.weakToStrongObjectsMapTable()
     private let notification: NSObjectProtocol?
@@ -66,5 +67,3 @@ public class DynamicTypeManagerClass {
         return nil
     }
 }
-
-public let DynamicTypeManager = DynamicTypeManagerClass() // Singleton

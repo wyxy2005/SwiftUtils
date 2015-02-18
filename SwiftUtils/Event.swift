@@ -6,8 +6,25 @@
 
 import Foundation
 
+public func ==(l: None, r: None) -> Bool { return true }
+public struct None: NilLiteralConvertible, Hashable, Equatable {
+    public init(nilLiteral: Void) {}
+    public var hashValue: Int { return 0 }
+}
+
 public class Event<T> {
     private var eventListeners = [EventListener<T>]()
+    
+    /*public class func listenAny<T>(listener: AnyObject, _ events: Event<T>...) -> EventListener<T> {
+    let eventListener = EventListener<T>(listener: listener)
+    for event in events { event.addListener(eventListener) }
+    return eventListener
+    }
+    public class func listenAny(listener: AnyObject, events: [Event<Any>]) -> EventListener<Any> {
+    let eventListener = EventListener<Any>(listener: listener)
+    for event in events { event.addListener(eventListener) }
+    return eventListener
+    }*/
     
     public var fireCount = 0
     public var listeners: [AnyObject] {
@@ -27,14 +44,8 @@ public class Event<T> {
     
     public init() {}
     
-    public func listen(listener: AnyObject, callback: () -> ()) -> EventListener<T> {
-        return addListener(EventListener<T>(listener: listener, callback: .Type1(callback)))
-    }
-    public func listen(listener: AnyObject, callback: (T) -> ()) -> EventListener<T> {
-        return addListener(EventListener<T>(listener: listener, callback: .Type2(callback)))
-    }
-    public func listen(listener: AnyObject, callback: (T, EventListener<T>) -> ()) -> EventListener<T> {
-        return addListener(EventListener<T>(listener: listener, callback: .Type3(callback)))
+    public func listen(listener: AnyObject) -> EventListener<T> {
+        return addListener(EventListener<T>(listener: listener))
     }
     
     public func fire(data: T) {
@@ -74,13 +85,13 @@ public class EventListener<T> {
     private var savedData: T?
     private var accumulator: ((oldData: T, justArrived: T) -> T) = { $1 }
     private var filter: (T -> Bool)?
-    private var callback: EventCallback<T>
+    private var callback: EventCallback<T>?
+    private var queue: dispatch_queue_t? = dispatch_get_main_queue()
     private var addedToQueue = false
     private var maxFireCount: Int?
     
-    private init (listener: AnyObject, callback: EventCallback<T>) {
+    private init(listener: AnyObject) {
         self.listener = listener
-        self.callback = callback
     }
     
     private func dispatch(var newData: T) {
@@ -99,7 +110,7 @@ public class EventListener<T> {
         if let delay = delay {
             if !addedToQueue {
                 addedToQueue = true
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { [weak self] in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), queue ?? DISPATCH_CURRENT_QUEUE_LABEL) { [weak self] in
                     if let me = self {
                         me.addedToQueue = false
                         
@@ -111,7 +122,9 @@ public class EventListener<T> {
             }
         }
         else {
-            callWithData(newData)
+            dispatch_async(queue ?? DISPATCH_CURRENT_QUEUE_LABEL) { [weak self] in
+                self?.callWithData(newData); return
+            }
         }
         
         fireCount++
@@ -121,10 +134,12 @@ public class EventListener<T> {
     }
     
     private func callWithData(data: T) {
-        switch callback {
-        case .Type1(let f): f()
-        case .Type2(let f): f(data)
-        case .Type3(let f): f(data, self)
+        if let callback = callback {
+            switch callback {
+            case .Type1(let f): f()
+            case .Type2(let f): f(data)
+            case .Type3(let f): f(data, self)
+            }
         }
     }
     
@@ -156,27 +171,42 @@ public class EventListener<T> {
         return self
     }
     
-    // TODO: choose queue
-    // TODO: better option?
-    public func fire() -> EventListener<T>  {
-        switch callback {
-        case .Type1(let f): f()
-        default: break // TODO: error message?
-        }
-        
+    public func action(callback: () -> ()) -> EventListener<T> {
+        self.callback = .Type1(callback)
         return self
     }
+    public func action(callback: (data: T) -> ()) -> EventListener<T> {
+        self.callback = .Type2(callback)
+        return self
+    }
+    public func action(callback: (T, EventListener<T>) -> ()) -> EventListener<T> {
+        self.callback = .Type3(callback)
+        return self
+    }
+    
+    public func queue(queue: dispatch_queue_t?) -> EventListener<T> {
+        self.queue = queue
+        return self
+    }
+    
     public func fire(data: T) -> EventListener<T>  {
         callWithData(data)
         return self
     }
+    public func fire() -> EventListener<T>  {
+        if let callback = callback {
+            switch callback {
+            case .Type1(let f): f()
+            default: assertionFailure("fire() called (with no data) on EventListener whose action block takes data")
+            }
+        }
+        return self
+    }
     
-    public func reset() {
+    public func resetAccumulator() {
         savedData = nil
     }
     public func cancel() {
         listener = nil
     }
 }
-
-
