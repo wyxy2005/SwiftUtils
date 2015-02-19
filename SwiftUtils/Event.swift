@@ -42,8 +42,6 @@ public class Event<T> {
         return listener
     }
     
-    public init() {}
-    
     public func listen(listener: AnyObject) -> EventListener<T> {
         return addListener(EventListener<T>(listener: listener))
     }
@@ -191,15 +189,6 @@ public class EventListener<T> {
     
     public func fire(data: T) -> EventListener<T>  {
         callWithData(data)
-        return self
-    }
-    public func fire() -> EventListener<T>  {
-        if let callback = callback {
-            switch callback {
-            case .Type1(let f): f()
-            default: assertionFailure("fire() called (with no data) on EventListener whose action block takes data")
-            }
-        }
         return self
     }
     

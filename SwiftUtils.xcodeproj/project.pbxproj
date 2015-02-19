@@ -51,6 +51,7 @@
 		FA03A7011A88C11200B4BF51 /* Segue Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Segue Manager.swift"; sourceTree = "<group>"; };
 		FA03A7021A88C11200B4BF51 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FA03A70B1A88C2AB00B4BF51 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
+		FA048AB71A955F0A00FB60B8 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = SOURCE_ROOT; };
 		FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTypeManager.swift; sourceTree = "<group>"; };
 		FA73D4D11A8D5355002BA1F4 /* ExpandableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewCell.swift; sourceTree = "<group>"; };
 		FA8665311A898512004615CC /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		FA03A6E11A88C0AE00B4BF51 /* SwiftUtils */ = {
 			isa = PBXGroup;
 			children = (
+				FA048AB71A955F0A00FB60B8 /* TODO.txt */,
 				FA15B3271A8929F6001E3866 /* DynamicTypeManager.swift */,
 				FA03A6FD1A88C11200B4BF51 /* Heartbeat.swift */,
 				FA03A6FE1A88C11200B4BF51 /* Simple Logging.swift */,

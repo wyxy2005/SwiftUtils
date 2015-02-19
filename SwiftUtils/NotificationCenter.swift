@@ -2,8 +2,6 @@
 //  NotificationCenter.swift
 //
 
-// ACTKit ?
-
 import Foundation
 
 // It would be cool if I could get this to work with complete type-safety:
@@ -13,12 +11,19 @@ import Foundation
 }
 public struct NCKeys {}
 */
+// It's probably not that important though. For type safety use the Event class
 
 public let NotificationCenter = NotificationCenterClass()
 
 public class NotificationCenterClass {
     
+    private var center = NSNotificationCenter.defaultCenter()
     private var observers = [String:[NotificationObserver]]()
+    
+    init() {}
+    init(notificationCenter: NSNotificationCenter) {
+        center = notificationCenter
+    }
     
     private func dumpNotificationObserver(toRemove: NotificationObserver) {
         let observersForKey = observers[toRemove.key]!
@@ -70,15 +75,25 @@ public class NotificationCenterClass {
     }
 }
 
+private enum NotificationCallback {
+    case Type1(() -> ())
+    case Type2((sender: AnyObject?) -> ())
+    case Type3((sender: AnyObject?, userInfo: NSDictionary?) -> ())
+    case Type4((observer: NotificationObserver, sender: AnyObject?, userInfo: NSDictionary?) -> ())
+}
+
+private enum NotificationFilter {
+    case Type1((userInfo: NSDictionary?) -> Bool)
+    case Type2((sender: AnyObject?, userInfo: NSDictionary?) -> Bool)
+}
+
 public class NotificationObserver {
-    
-    public typealias NotificationBlock = (observer: NotificationObserver, sender: AnyObject?, userInfo: NSDictionary?)->()
     
     private weak var sender: AnyObject?
     private weak var observer: AnyObject?
     private var queue: NSOperationQueue? = NSOperationQueue.mainQueue()
-    private var block: NotificationBlock?
-    private var filter: (userInfo: NSDictionary?) -> Bool = { _ in true }
+    private var block: NotificationCallback?
+    private var filter: NotificationFilter = .Type1({ _ in true })
     private var notificationObject: NSObjectProtocol?
     private var maxFireCount: Int?
     
@@ -99,43 +114,70 @@ public class NotificationObserver {
         notificationObject = NSNotificationCenter
             .defaultCenter()
             .addObserverForName(key, object: sender, queue: queue) { [weak self] n in
-                let notificationSender: AnyObject? = n.object
-                let userInfo = n.userInfo
-                
-                if let me = self {
-                    if let sender: AnyObject = me.sender {
-                        if notificationSender == nil { return }
-                        if sender !== notificationSender! { return }
-                    }
-                    
-                    if me.observer != nil {
-                        if let block = me.block {
-                            if me.filter(userInfo: userInfo) {
-                                me.dispatch(block: block, sender: notificationSender, userInfo: userInfo)
-                            }
-                        }
-                    }
-                    else { me.remove() }
-                }
+                self?.notificationFired(sender: n.object, userInfo: n.userInfo); return
         }
     }
     
-    private func dispatch(#block: NotificationBlock, sender: AnyObject?, userInfo: NSDictionary?) {
-        block(observer: self, sender: sender, userInfo: userInfo)
+    private func notificationFired(sender notificationSender: AnyObject?, userInfo: NSDictionary?) {
+        if let sender: AnyObject = self.sender {
+            if notificationSender == nil { return }
+            if notificationSender! !== sender { return }
+        }
+        
+        if observer != nil {
+            if let block = block {
+                if callFilter(sender: sender, userInfo: userInfo) {
+                    dispatch(block: block, sender: notificationSender, userInfo: userInfo)
+                }
+            }
+        }
+        else { remove() }
+    }
+    
+    private func callFilter(#sender: AnyObject?, userInfo: NSDictionary?) -> Bool {
+        switch filter {
+        case .Type1(let f): return f(userInfo: userInfo)
+        case .Type2(let f): return f(sender: sender, userInfo: userInfo)
+        }
+    }
+    
+    private func dispatch(#block: NotificationCallback, sender: AnyObject?, userInfo: NSDictionary?) {
+        switch block {
+        case .Type1(let f): f()
+        case .Type2(let f): f(sender: sender)
+        case .Type3(let f): f(sender: sender, userInfo: userInfo)
+        case .Type4(let f): f(observer: self, sender: sender, userInfo: userInfo)
+        }
+        
         fireCount++
         if let count = maxFireCount {
             if fireCount >= count { remove() }
         }
     }
     
-    public func sender(sender: AnyObject?) -> NotificationObserver {
-        self.sender = sender
+    public func action(block: () -> ()) -> NotificationObserver {
+        self.block = .Type1(block)
+        reloadNotification()
+        return self
+    }
+    public func action(block: (sender: AnyObject?) -> ()) -> NotificationObserver {
+        self.block = .Type2(block)
+        reloadNotification()
+        return self
+    }
+    public func action(block: (sender: AnyObject?, userInfo: NSDictionary?) -> ()) -> NotificationObserver {
+        self.block = .Type3(block)
+        reloadNotification()
+        return self
+    }
+    public func action(block: (observer: NotificationObserver, sender: AnyObject?, userInfo: NSDictionary?) -> ()) -> NotificationObserver {
+        self.block = .Type4(block)
         reloadNotification()
         return self
     }
     
-    public func block(block: NotificationBlock) -> NotificationObserver {
-        self.block = block
+    public func sender(sender: AnyObject?) -> NotificationObserver {
+        self.sender = sender
         reloadNotification()
         return self
     }
@@ -147,7 +189,11 @@ public class NotificationObserver {
     }
     
     public func filter(filter: (userInfo: NSDictionary?) -> Bool) -> NotificationObserver {
-        self.filter = filter
+        self.filter = .Type1(filter)
+        return self
+    }
+    public func filter(filter: (sender: AnyObject?, userInfo: NSDictionary?) -> Bool) -> NotificationObserver {
+        self.filter = .Type2(filter)
         return self
     }
     

@@ -1,0 +1,6 @@
+
+- ACTKit ?
+
+- UIControl events with closures
+    Perfect:
+    myButton.event(.TouchUpInside) returns Event<UIButton> ready to use
