@@ -1,6 +1,4 @@
 
 - ACTKit ?
 
-- UIControl events with closures
-    Perfect:
-    myButton.event(.TouchUpInside) returns Event<UIButton> ready to use
+- Interface events: remove listener only works for exactly the same control events that the listener was registed with
