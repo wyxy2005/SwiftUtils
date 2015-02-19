@@ -2,7 +2,7 @@
 //  Interface Events.swift
 //
 
-import Foundation
+import UIKit
 
 private let UIControlEventsMapTableStorage = NSMapTable.weakToStrongObjectsMapTable() // [UIControl : [UIControlEventClass : EventObjcWrapper]]
 
