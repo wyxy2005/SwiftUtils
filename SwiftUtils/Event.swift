@@ -173,11 +173,11 @@ public class EventListener<T> {
         self.callback = .Type1(callback)
         return self
     }
-    public func action(callback: (data: T) -> ()) -> EventListener<T> {
+    /*public func action(callback: (T) -> ()) -> EventListener<T> {
         self.callback = .Type2(callback)
         return self
-    }
-    public func action(callback: (T, EventListener<T>) -> ()) -> EventListener<T> {
+    }*/
+    public func action(callback: (data: T, listener: EventListener<T>) -> ()) -> EventListener<T> {
         self.callback = .Type3(callback)
         return self
     }
