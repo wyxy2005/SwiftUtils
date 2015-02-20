@@ -84,11 +84,14 @@ public class UserDefaultsClass {
     public convenience init() {
         self.init(iCloudSync: false)
     }
-    public convenience init(storage: NSUserDefaults) {
-        self.init(storage: storage, iCloudSync: false)
+    public convenience init(suiteName: String) {
+        self.init(suiteName: suiteName, iCloudSync: false)
     }
     public convenience init(iCloudSync: Bool) {
         self.init(storage: NSUserDefaults.standardUserDefaults(), iCloudSync: iCloudSync)
+    }
+    public convenience init(suiteName: String, iCloudSync: Bool) {
+        self.init(storage: NSUserDefaults(suiteName: suiteName)!, iCloudSync: iCloudSync)
     }
     public init(storage: NSUserDefaults, iCloudSync: Bool) {
         self.diskStorage = storage
